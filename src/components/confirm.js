@@ -9,6 +9,7 @@ import { Modal as bs5Modal } from "bootstrap";
  * @param {Object} options - The options for the modal.
  * @param {string} options.title - The title of the modal.
  * @param {string} options.type - The type of the modal.
+ * @param {boolean} options.staticBackdrop - If clicking the backdrop closes the modal (false for yes, true for no)
  * @param {string} options.id - The ID of the modal.
  * @param {string} options.size - The size of the modal.
  * @param {string} options.btnOkText - The text to display on the OK button.
@@ -24,6 +25,7 @@ export function confirm(content = "", options = {}) {
     title: i18n.getConfig("sure"),
     type: "danger",
     id: "",
+    staticBackdrop: false,
     size: "md",
     btnOkText: "",
     btnCancelText: "",
@@ -39,7 +41,7 @@ export function confirm(content = "", options = {}) {
   if (options.id && document.getElementById(options.id)) {
     modalElement = document.getElementById(options.id);
   } else {
-    modalElement = setModalWrapper();
+    modalElement = setModalWrapper(options.staticBackdrop);
     options.id = options.id || genDialogId();
     modalElement.setAttribute("id", options.id);
   }
