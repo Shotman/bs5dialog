@@ -153,10 +153,12 @@ export function genDialogId() {
  * Creates a modal wrapper element with specific classes and attributes.
  * @returns {HTMLElement} The modal wrapper element.
  */
-export function setModalWrapper() {
+export function setModalWrapper(bsBackdropStatic) {
   let modal = document.createElement("div");
   modal.classList.add("modal", "bs5dialog-modal", "fade");
-  modal.setAttribute("data-bs-backdrop", "static");
+  if(bsBackdropStatic){
+    modal.setAttribute("data-bs-backdrop", "static");
+  }
   modal.setAttribute("tabindex", "-1");
   return modal;
 }
