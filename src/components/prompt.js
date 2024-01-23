@@ -10,6 +10,7 @@ import { Modal as bs5Modal } from "bootstrap";
  * @param {string} options.title - The title of the dialog.
  * @param {string} options.type - The type of the dialog.
  * @param {string} options.size - The size of the dialog.
+ * @param {boolean} options.staticBackdrop - If clicking the backdrop closes the modal (false for yes, true for no)
  * @param {string} options.btnText - The text to display on the button.
  * @param {string} options.icon - The icon to display in the dialog.
  * @param {string} options.iconClass - The class of the icon to display in the dialog.
@@ -25,6 +26,7 @@ export function prompt(content, options = {}) {
     title: "",
     type: "secondary",
     size: "md",
+    staticBackdrop: false,
     btnText: "",
     icon: null,
     iconClass: "",
@@ -39,7 +41,7 @@ export function prompt(content, options = {}) {
   if (options.id && document.getElementById(options.id)) {
     modalElement = document.getElementById(options.id);
   } else {
-    modalElement = setModalWrapper();
+    modalElement = setModalWrapper(options.staticBackdrop);
     options.id = options.id || genDialogId();
     modalElement.setAttribute("id", options.id);
   }
