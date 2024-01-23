@@ -11,6 +11,7 @@ import { Modal as bs5Modal } from "bootstrap";
  * @param {string} options.type - The type of the alert modal (e.g. "success", "warning", "danger").
  * @param {string} options.size - The size of the alert modal (e.g. "sm", "md", "lg").
  * @param {string} options.id - The ID of the alert modal.
+ * @param {boolean} options.staticBackdrop - If clicking the backdrop closes the modal (false for yes, true for no)
  * @param {string} options.btnOkText - The text to display on the OK button.
  * @param {string} options.icon - The name of the icon to display in the alert modal.
  * @param {string} options.iconClass - The CSS class for the icon.
@@ -25,6 +26,7 @@ export function alert(content, options = {}) {
     type: "success",
     size: "md",
     id: "",
+    staticBackdrop: false,
     btnOkText: "",
     icon: null,
     iconClass: "",
@@ -37,7 +39,7 @@ export function alert(content, options = {}) {
   if (options.id && document.getElementById(options.id)) {
     modalElement = document.getElementById(options.id);
   } else {
-    modalElement = setModalWrapper();
+    modalElement = setModalWrapper(options.staticBackdrop);
     options.id = options.id || genDialogId();
     modalElement.setAttribute("id", options.id);
   }
